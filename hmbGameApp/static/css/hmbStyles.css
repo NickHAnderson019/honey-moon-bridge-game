@@ -1,0 +1,202 @@
+.cardtable{
+  height: 500px;
+  background: #339900;
+  margin: auto;
+  width: 700px;
+  padding: 10px;
+}
+
+.deck{
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  left: 0;
+}
+
+.viscard{
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  right: 0;
+}
+
+.play-cards{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* right: 0; */
+}
+
+.enter-bid-box{
+  position: absolute;
+  width: 30%;
+  height: 25%;
+  right: 0;
+  top: 20%;
+  padding: 10px;
+  background-color: white;
+  border: 5px red solid;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+.scoreboard-box{
+  position: absolute;
+  width: 30%;
+  height: 40%;
+  right: 0;
+  top: 20%;
+  padding: 5px;
+  background-color: white;
+  border: 5px grey solid;
+  font-family: sans-serif;
+  line-height: 2px;
+}
+
+.scoreboard-box .playernames{
+  position: absolute;
+  width: 55%;
+  height: 60%;
+  top: 40%;
+  background-color: white;
+  font-family: sans-serif;
+  font-size: 12px;
+}
+
+.scoreboard-box .scores{
+  position: absolute;
+  width: 20%;
+  height: 60%;
+  top: 40%;
+  right: 25%;
+  background-color: white;
+  font-family: sans-serif;
+  font-size: 12px;
+  text-align: center;
+}
+
+.scoreboard-box .bids{
+  position: absolute;
+  width: 25%;
+  height: 60%;
+  top: 40%;
+  right: 0;
+  background-color: white;
+  font-family: sans-serif;
+  font-size: 12px;
+  text-align: center;
+}
+
+#cards-top.cards {
+  position: relative;
+  height: 33%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#cards-mid.cards {
+  position: relative;
+  height: 33%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#cards-bot.cards {
+  position: relative;
+  height: 33%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.card-img{
+  position: absolute;
+  width: 80px;
+  transition: 0.25s;
+  left: 45%;
+  bottom: 10%;
+}
+
+.viscard .card-img{
+  position: absolute;
+  width: 80px;
+  transition: 0.25s;
+  left: 0%;
+  top: 10%;
+}
+
+.deck .card-img{
+  position: absolute;
+  width: 80px;
+  transition: 0.25s;
+  left: 75%;
+  top: 10%;
+}
+
+.play-cards .card_img{
+  position: absolute;
+  width: 80px;
+  transition: 0.25s;
+  left: 45%;
+  top: 10%;
+}
+
+.brightness { filter: brightness(0.35); }
+.blur { filter: blur(2px); }
+
+#card-back{content:url(images/red_back.png);}
+
+#card-2C{content:url(images/2C.png);}
+#card-3C{content:url(images/3C.png);}
+#card-4C{content:url(images/4C.png);}
+#card-5C{content:url(images/5C.png);}
+#card-6C{content:url(images/6C.png);}
+#card-7C{content:url(images/7C.png);}
+#card-8C{content:url(images/8C.png);}
+#card-9C{content:url(images/9C.png);}
+#card-TC{content:url(images/TC.png);}
+#card-JC{content:url(images/JC.png);}
+#card-QC{content:url(images/QC.png);}
+#card-KC{content:url(images/KC.png);}
+#card-AC{content:url(images/AC.png);}
+
+#card-2S{content:url(images/2S.png);}
+#card-3S{content:url(images/3S.png);}
+#card-4S{content:url(images/4S.png);}
+#card-5S{content:url(images/5S.png);}
+#card-6S{content:url(images/6S.png);}
+#card-7S{content:url(images/7S.png);}
+#card-8S{content:url(images/8S.png);}
+#card-9S{content:url(images/9S.png);}
+#card-TS{content:url(images/TS.png);}
+#card-JS{content:url(images/JS.png);}
+#card-QS{content:url(images/QS.png);}
+#card-KS{content:url(images/KS.png);}
+#card-AS{content:url(images/AS.png);}
+
+#card-2H{content:url(images/2H.png);}
+#card-3H{content:url(images/3H.png);}
+#card-4H{content:url(images/4H.png);}
+#card-5H{content:url(images/5H.png);}
+#card-6H{content:url(images/6H.png);}
+#card-7H{content:url(images/7H.png);}
+#card-8H{content:url(images/8H.png);}
+#card-9H{content:url(images/9H.png);}
+#card-TH{content:url(images/TH.png);}
+#card-JH{content:url(images/JH.png);}
+#card-QH{content:url(images/QH.png);}
+#card-KH{content:url(images/KH.png);}
+#card-AH{content:url(images/AH.png);}
+
+#card-2D{content:url(images/2D.png);}
+#card-3D{content:url(images/3D.png);}
+#card-4D{content:url(images/4D.png);}
+#card-5D{content:url(images/5D.png);}
+#card-6D{content:url(images/6D.png);}
+#card-7D{content:url(images/7D.png);}
+#card-8D{content:url(images/8D.png);}
+#card-9D{content:url(images/9D.png);}
+#card-TD{content:url(images/TD.png);}
+#card-JD{content:url(images/JD.png);}
+#card-QD{content:url(images/QD.png);}
+#card-KD{content:url(images/KD.png);}
+#card-AD{content:url(images/AceD.png);}

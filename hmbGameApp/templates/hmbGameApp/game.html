@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_scripts %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/hmbStyles.css' %}" />
+{% endblock %}
+
+{% block content %}
+
+<div class="cardtable">
+
+  <!-- Opponent cards -->
+  <div class='cards' id="cards-top"></div>
+
+  <!-- Deck and vis card -->
+  <div class='cards' id="cards-mid">
+
+    <div class="play-cards" id="play-cards"></div>
+
+    <div class="deck" id="deck"></div>
+
+    <div class="viscard" id="viscard">
+
+    </div>
+
+  </div>
+
+  <!-- Player cards -->
+  <div class='cards' id="cards-bot"></div>
+
+</div>
+
+{% endblock %}
+
+{% block js_scripts %}
+
+<script type="text/javascript" src="{% static 'js/gameClasses.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/gameRun.js' %}"></script>
+
+{% endblock %}

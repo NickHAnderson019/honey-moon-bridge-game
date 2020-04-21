@@ -4,5 +4,5 @@ from . import views
 app_name='hmbGameApp'
 
 urlpatterns = [
-    path('playgame/', views.game),
+    path('playgame/', views.game, name='game'),
 ]

@@ -90,7 +90,7 @@ class Hand{
 
     constructor(){
         this.cards = new Array();
-        this.suites = new Array()
+        this.suites = new Array();
     }
     addCard(card){
         this.cards.push(card);
@@ -105,6 +105,10 @@ class Hand{
     }
     hasSuite(suite){
         return this.suites.includes(suite);
+    }
+    clearHand(){
+      this.cards = new Array();
+      this.suites = new Array();
     }
 }
 
@@ -208,4 +212,30 @@ class Round{
     console.log(this.player1.name + ": " + this.player1.round_score + " (" + this.player1.bid + ")");
     console.log(this.player2.name + ": " + this.player2.round_score + " (" + this.player2.bid + ")");
   }
+}
+
+class Game{
+
+  constructor(player1, player2){
+    this.player1 = player1;
+    this.player2 = player2;
+    this.round_count = 0;
+  }
+
+  setGameDetails(player1, player2){
+    this.player1 = player1;
+    this.player2 = player2;
+  }
+
+  nextRound(){
+    this.round_count += 1;
+    this.player1.game_score += 1;
+    this.player1.hand.clearHand();
+    this.player2.hand.clearHand();
+    this.player1.bid = null;
+    this.player2.bid = null;
+    this.player1.round_score = 0;
+    this.player2.round_score = 0;
+  }
+
 }

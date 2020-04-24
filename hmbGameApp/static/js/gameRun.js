@@ -1,3 +1,47 @@
+function getName(){
+    username = document.getElementById("name-text").value;
+
+    // remove text field and button
+    var name_box = document.getElementById("enter-name-box");
+    name_box.parentElement.removeChild(name_box);
+
+    startGame()
+}
+
+function startGame(){
+
+  p1 = new Player(name=username, hand=new Hand());
+  p2 = new Player(name="Chris", hand=new Hand(), is_bot=true);
+  players = [p1, p2];
+
+  game = new Game(p1,p2);
+
+  playGame();
+}
+
+function playGame(){
+
+  deck = new Deck();
+  deck.shuffle();
+  makeDeck(deck.allcards); //html
+
+  // Who gets first pick
+  p1.is_first_pick = randomChoice([true, false]);
+  p2.is_first_pick = !p1.is_first_pick;
+
+  // sort players array to first pick first
+  players.sort(function(a, b){
+      return b.is_first_pick-a.is_first_pick
+  })
+
+  // set which player it is.
+  p = players[0];
+  // toggleOrder();
+
+  // start dealing phase
+  dealingPhase();
+}
+
 function stackCards(ID) {
   var idcards = document.querySelectorAll('#'+ID+' .card-img'),
       offset = 25;
@@ -114,6 +158,7 @@ function clickRemVisCard(val=1){
     }
     // loop back
     if (deck.allcards.length) {
+      toggleOrder();
       dealingPhase();
     }
     else{
@@ -167,6 +212,35 @@ function pickDeckCardClickFunction(){
   clickRemVisCard(2);
 }
 
+function dealingPhase(){
+
+  console.log("It is "+p.name+"'s turn");
+  var topdeckcards = document.querySelectorAll('#deck .card-img');
+  topdeckcard = topdeckcards[topdeckcards.length-1];
+
+  if (!p.is_bot){
+    topdeckcard.addEventListener('click', topDeckClickFunction);
+  }
+  else{
+    // is bot - pick up and discard random card
+    p.pickUpCard(deck.getCard());
+    removeCardDeck(); //html
+    ignore_card = deck.getCard()
+    removeCardDeck(); //html
+
+    displayPlayerHand(p);
+
+    if (deck.allcards.length) { // deck is not finished
+      toggleOrder();
+      dealingPhase();
+    }
+    else{
+      console.log("Begin Bidding Phase!");
+      biddingPhase()
+    }
+  }
+}
+
 function topDeckClickFunction(){
   // remove created click event listener
   var topdeckcards = document.querySelectorAll('#deck .card-img');
@@ -186,39 +260,6 @@ function topDeckClickFunction(){
   topdeckcard = topdeckcards[topdeckcards.length-1];
   topdeckcard.addEventListener('click', pickDeckCardClickFunction);
 }
-
-
-function dealingPhase(){
-  // set which player it is.
-  toggleOrder();
-  console.log("It is "+p.name+"'s turn");
-  var topdeckcards = document.querySelectorAll('#deck .card-img');
-  topdeckcard = topdeckcards[topdeckcards.length-1];
-
-  if (!p.is_bot){
-    topdeckcard.addEventListener('click', topDeckClickFunction);
-  }
-  else{
-    // is bot - pick up and discard random card
-    p.pickUpCard(deck.getCard());
-    removeCardDeck(); //html
-    ignore_card = deck.getCard()
-    removeCardDeck(); //html
-
-    displayPlayerHand(p);
-
-
-
-    if (deck.allcards.length) { // deck is finished
-      dealingPhase();
-    }
-    else{
-      console.log("Begin Bidding Phase!");
-      biddingPhase()
-    }
-  }
-}
-
 
 function getBid() {
   var player_bid = document.getElementById("bid-list").value;
@@ -274,8 +315,9 @@ function updateScoreboard(){
   p_p1score.textContent = p1.round_score;
   p_p2score.textContent = p2.round_score;
   if (p1.bid) p_p1bid.textContent = "("+p1.bid+")";
+  else p_p1bid.textContent = "()";
   if (p2.bid) p_p2bid.textContent = "("+p2.bid+")";
-
+  else p_p2bid.textContent = "()";
 }
 
 
@@ -353,8 +395,9 @@ function playingPhase(){
   trick = new Trick();
   round = new Round(trick, players[0], players[1]);
 
-  round.trick.lead_player = players[0];
-  round.trick.follow_player = players[1];
+
+  // round.trick.lead_player = players[0];
+  // round.trick.follow_player = players[1];
 
   gamePlay()
 
@@ -449,7 +492,7 @@ function playerPlayCard(evt){
 
   p1.playCard(play_card); // remove card from hand
 
-  displayPlayedCards(); // show card on table
+  displayPlayedCards(); // show cards on table
   displayPlayerHand(p1); // re-display player hand without card
   displayPlayerHand(p2); // re-display player hand without card
   endTrick();
@@ -458,7 +501,8 @@ function playerPlayCard(evt){
     .then(() => {
   if (round.trick.num == round.total_tricks+1) {
     removePlayedCards();
-    finish();
+    $('#play-cards').prependTo('#cards-mid');
+    finishRound();
   }
   else {
     gamePlay();
@@ -505,7 +549,6 @@ function removePlayedCards(){
   div_PC.id = "play-cards";
   parentCM.appendChild(div_PC);
 }
-
 
 function stackPlayedCards(){
   var played_cards = document.querySelectorAll('#play-cards .card_img'),
@@ -600,34 +643,39 @@ function highlightWinnerCardScoreboard(){
   });
 }
 
-function finish(){
+function finishRound(){
   console.log("FINISHED ROUND!")
+
+  // game.calcScores()
+  game.nextRound();
+
+  // sort players to highest score goes first
+  players.sort(function(a, b){
+      return b.round_score-a.round_score;
+  })
+
+  // trick = new Trick();
+  // round = new Round(trick, players[0], players[1]);
+
+  if (game.round_count!=2) playGame();
+  else console.log("Game Over!");
 }
 
 // ============================================================================
 // Main
 // ============================================================================
 
-var deck = new Deck();
-deck.shuffle();
-makeDeck(deck.allcards); //html
+game = new Game();
 
-var p1 = new Player(name="Nick", hand=new Hand());
-var p2 = new Player(name="Chris", hand=new Hand(), is_bot=true);
-var players = [p1, p2];
+var p_cbtext = document.getElementById("cb-text")
+var p_username = document.getElementById("username")
 
-// Who gets first pick
-p1.is_first_pick = randomChoice([true, false]);
-p2.is_first_pick = !p1.is_first_pick;
-
-// sort players array to first pick first
-players.sort(function(a, b){
-    return b.is_first_pick-a.is_first_pick
-})
-
-// set which player it is.
-p = players[0];
-toggleOrder();
-
-// start dealing phase
-dealingPhase();
+if (p_username){ // player is logged in
+    username = p_username.textContent;
+    p_cbtext.textContent = "Welcome "+username+" to Honeymoon Bridge!";
+    startGame();
+}
+else{ // player not logged in. Need to create text input field
+  p_cbtext.textContent = "Welcome to Honeymoon Bridge! Please insert your name below.";
+  document.getElementById("name-button").addEventListener("click", getName);
+}

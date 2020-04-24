@@ -1,3 +1,14 @@
+#username{
+  color: white;
+}
+
+#enter-name-box{
+  position: absolute;
+  bottom: 0;
+  font-weight: bolder;
+  font-size: 0.8rem;
+}
+
 .cardtable{
   height: 500px;
   background: #339900;
@@ -30,6 +41,7 @@
   padding-top: 9px;
   /* margin: auto; */
   font-weight: bolder;
+  font-size: 0.8rem;
   /* font-family: sans-serif; */
 }
 

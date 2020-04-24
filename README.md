@@ -1,7 +1,6 @@
 # HMB_Card_Game
 Project to make the card game, Honeymoon Bridge.
 
-
 Write to requirements.txt file:
 
 $ pip freeze > requirements.txt

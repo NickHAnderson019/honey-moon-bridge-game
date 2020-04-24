@@ -247,70 +247,20 @@ function getBid() {
 
 function makeScoreboard(){
 
-  var parentEl = document.getElementById("viscard");
-  var div_scoreboardbox = document.createElement("div");
-  div_scoreboardbox.classList.add('scoreboard-box');
-  div_scoreboardbox.id = "scoreboard-box"
+  var sb_box = document.getElementById("scoreboard-box");
+  sb_box.style.color = "black";
+  sb_box.style.border = "5px grey solid";
+  sb_box.style.backgroundColor = "white";
 
-  // scoreboard title
-  var div_title = document.createElement("p");
-  var str_title = document.createElement("STRONG");
-  str_title.textContent = "SCORES";
-  div_title.appendChild(str_title);
+  var sb_title = document.getElementById("sb-title");
+  sb_title.textContent = "SCORE"
 
-  div_scoreboardbox.appendChild(div_title);
+  var p_p1name = document.getElementById("p1-name");
+  var p_p2name = document.getElementById("p2-name");
 
-  // player names
-  var div_playernames = document.createElement("div");
-  div_playernames.classList.add('playernames');
-
-  var p_p1name = document.createElement("p");
-  p_p1name.id = "p1-name";
   p_p1name.textContent = p1.name;
-
-  var p_p2name = document.createElement("p");
-  p_p2name.id = "p2-name";
   p_p2name.textContent = p2.name;
 
-  div_playernames.appendChild(p_p1name);
-  div_playernames.appendChild(p_p2name);
-  div_scoreboardbox.appendChild(div_playernames);
-
-  // player scores
-  var div_scores = document.createElement("div");
-  div_scores.classList.add('scores');
-
-  var p_p1score = document.createElement("p");
-  p_p1score.id = "p1-score";
-  p_p1score.textContent = p1.round_score;
-
-  var p_p2score = document.createElement("p");
-  p_p2score.id = "p2-score";
-  p_p2score.textContent = p2.round_score;
-
-  div_scores.appendChild(p_p1score);
-  div_scores.appendChild(p_p2score);
-  div_scoreboardbox.appendChild(div_scores);
-
-  // player bids
-  var div_bids = document.createElement("div");
-  div_bids.classList.add('bids');
-
-  var p_p1bid = document.createElement("p");
-  p_p1bid.id = "p1-bid"
-  p_p1bid.textContent = "(bid)";
-
-  var p_p2bid = document.createElement("p");
-  p_p2bid.id = "p2-bid"
-  p_p2bid.textContent = "(bid)";
-
-  div_bids.appendChild(p_p1bid);
-  div_bids.appendChild(p_p2bid);
-  div_scoreboardbox.appendChild(div_bids);
-
-  parentEl.appendChild(div_scoreboardbox);
-
-  // console.log("Scoreboard created!")
 }
 
 
@@ -346,9 +296,11 @@ function biddingPhase(){
   div.classList.add("enter-bid-box");
   div.id = "enter-bid-box";
 
-  var lab = document.createElement("label");
-  lab.htmlFor = "bid-list";
-  lab.textContent = "Select Bid:";
+  // var lab = document.createElement("label");
+  // lab.htmlFor = "bid-list";
+  // lab.textContent = "Select Bid: ";
+  var p_bid = document.createElement("p");
+  p_bid.textContent = "Select Bid:";
 
   var ddlist = document.createElement("SELECT");
   ddlist.id = "bid-list";
@@ -381,7 +333,7 @@ function biddingPhase(){
   but.id = "bid-button"
   but.textContent = "Submit"
 
-  div.appendChild(lab);
+  div.appendChild(p_bid);
   div.appendChild(ddlist);
   div.appendChild(but);
   parentEl.appendChild(div);
@@ -391,7 +343,7 @@ function biddingPhase(){
 }
 
 function playingPhase(){
-  console.log("Bidding Phase!")
+  console.log("Playing Phase!")
 
   // sort players to highest bid goes first
   players.sort(function(a, b){

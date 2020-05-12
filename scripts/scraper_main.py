@@ -163,11 +163,8 @@ def main(update, context):
     print("LinkedIn Data Extractor for PiP")
     print("---------------------------------------------------------------------")
 
-    # Maybe ask user to input LinkedIn username and password
-    #username = base64.b64decode(constants.USER_EMAIL).decode("utf-8")
-    #password = base64.b64decode(constants.PASSWORD).decode("utf-8")
-    username = 'christine.court.77@gmail.com'
-    password = 'Wildpigs7!'
+    username = temp_username ### ENTER THIS STUFF
+    password = temp_password ###
 
     # PiP employee LinkedIn Details ------------------------------------------------
 
